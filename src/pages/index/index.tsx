@@ -117,7 +117,7 @@ export default function Index(props: Props) {
         onOk={save}
         cancelText='就这些吧'
         okText='差不多了嗷'>
-          <span className='modal-tip'>--食物需用逗号分开--</span>
+          <span className='modal-tip'>--食物需用空格分开--</span>
           <TextArea
           showCount
           autoSize={{minRows: 6,maxRows: 20}}
