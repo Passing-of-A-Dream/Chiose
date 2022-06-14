@@ -1,3 +1,9 @@
+# 随机选择食物
+  随机选择你输入的或者默认的食物，来搞定你的选择困难症
+
+## 运行
+  使用yarn下载依赖，yarn start运气即可
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
