@@ -73,7 +73,7 @@ export default function Index(props: Props) {
     if (localStorage.getItem('city') === null) {
       await $axios.get('https://restapi.amap.com/v3/ip', {
         params: {
-          key: '2feda1e7499a5d4cbb7348115446faca'
+          key: ''
         }
       }).then(res => {
         setCity(res.data)
@@ -91,7 +91,7 @@ export default function Index(props: Props) {
     if (localStorage.getItem('weather') === null) {
       await $axios.get('https://restapi.amap.com/v3/weather/weatherInfo', {
         params: {
-          key: '2feda1e7499a5d4cbb7348115446faca',
+          key: '',
           city: cityCode,
           extensions: 'base'
         }
