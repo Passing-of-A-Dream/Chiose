@@ -56,9 +56,9 @@ export default function Index(props: Props) {
   useEffect(() => {
     getCity();
     let cityTime = localStorage.getItem('cityTime')
-    console.log(cityTime);
+    // console.log(cityTime);
     let cityTime2 = moment().subtract(1, 'days').format('YYYY-MM-DD');
-    console.log(cityTime2);
+    // console.log(cityTime2);
     if (cityTime === cityTime2) {
       localStorage.removeItem('cityTime');
       localStorage.removeItem('city');
@@ -66,7 +66,7 @@ export default function Index(props: Props) {
       localStorage.removeItem('weatherTime');
       getCity();
     }
-    console.log(JSON.parse(localStorage.getItem('weather') as string));
+    // console.log(JSON.parse(localStorage.getItem('weather') as string));
   }, [])
   // 封装城市
   const getCity = async () => {
