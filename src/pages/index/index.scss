@@ -1,60 +1,33 @@
-.index {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  background-color: #fff;
-  user-select: none;
-  background-image: url("../../static/image/bg.jpg");
-  background-repeat: repeat;
-  position: relative;
-  .logo {
-    width: 200px;
-    height: 40px;
-    position: absolute;
-    top: 10%;
-  }
-  .select {
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    .time {
-      font-size: 20px;
-      position: absolute;
-      top: calc(10% + 50px);
-    }
-    .food {
-      font-size: 36px;
-      color: #ff9733;
-      margin-bottom: 20px;
-      text-align: center;
-    }
-    .select-children {
-      .switch {
-        margin-right: 10px;
-      }
-    }
-    .option {
-      margin-top: 20px;
-      button {
-        color: #1fd9f6;
-        border: 1px solid #1fd9f6;
-      }
-      button:hover {
-        background-color: #1fd9f6;
-        color: #fff;
-      }
-      button:first-child {
-        margin-right: 20px;
-      }
-    }
-  }
-}
-.modal-tip {
-  display: block;
+.select {
+  height: 100%;
   width: 100%;
-  text-align: center;
-  margin-bottom: 10px;
+  background-color: #faebd7;
+  font-size: 24px;
+  .header {
+    height: 15%;
+    background-color: cadetblue;
+    .title {
+      // height: 18%;
+      width: 100%;
+      display: grid;
+      place-items: center;
+      .word {
+        padding: 10px;
+        font-size: 26px;
+        color: burlywood;
+      }
+    }
+  }
+  .main {
+    height: 70%;
+    background-color: aqua;
+    display: grid;
+    place-items: center;
+  }
+  .footer {
+    height: 15%;
+    background-color: aquamarine;
+    display: grid;
+    place-items: center;
+  }
 }
