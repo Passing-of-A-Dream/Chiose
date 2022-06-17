@@ -1,8 +1,8 @@
-.index {
+.FoodChiose {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  // justify-content: center;
   height: 100vh;
   background-color: #fff;
   user-select: none;
@@ -10,30 +10,35 @@
   background-repeat: repeat;
   position: relative;
   overflow: hidden;
-  .logo {
-    width: 200px;
-    height: 40px;
-    position: absolute;
-    top: 10%;
-  }
-  .select {
-    // width: 50%;
+  .time-address{
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    margin-top: 40px;
     .time {
       font-size: 20px;
-      position: absolute;
-      top: calc(10% + 60px);
     }
     .container {
       font-size: 20px;
-      position: absolute;
-      top: calc(10% + 100px);
       width: 160px;
       display: flex;
       justify-content: space-between;
     }
+  }
+  .logo {
+    margin-top: 40px;
+    width: 200px;
+    height: 40px;
+    // position: absolute;
+    top: 10%;
+  }
+  .select {
+    margin-top: 20px;
+    // width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     .food {
       font-size: 36px;
       color: #ff9733;

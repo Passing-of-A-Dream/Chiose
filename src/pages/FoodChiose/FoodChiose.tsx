@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react'
 import './FoodChiose.scss'
 import moment from 'moment';
 import { Button, Input, message, Modal, Popconfirm, Switch } from 'antd';
-import $axios from '../../api/axios';
+import Map from '../map/map';
+import { getMap, getMapWeather } from '../api/map';
 
 const foodList1 = "馄饨 烩面 热干面 刀削面 油泼面 炸酱面 炒面 重庆小面 米线 酸辣粉 土豆粉 螺狮粉 凉皮儿 麻辣烫 肉夹馍 羊肉泡馍 炒饭 盖浇饭 烤肉饭 黄焖鸡米饭 麻辣香锅 火锅 酸菜鱼 烤串 披萨 烤鸭 汉堡 炸鸡 寿司 煎饼果子 南瓜粥 小龙虾 牛排 砂锅 大排档 馒头 西餐 自助餐 小笼包 水果 西北风 烧烤 泡面 水饺 日本料理 涮羊肉 肯德基 面包 臊子面 小笼包 麦当劳 沙县小吃 烤鱼 海鲜 铁板烧 韩国料理 甜点 鸭血粉丝汤"
 
@@ -11,7 +12,7 @@ type Props = {
 type city = {
   [key: string]: string
 }
-export default function Index(props: Props) {
+export default function FoodChiose(props: Props) {
   const [date, setDate] = useState(moment().format('LTS'));
   const [food, setFood] = useState('开始选择食物吧!');
   const [foodList, setFoodList] = useState(['面包', '蛋糕', '西瓜', '苹果', '螺丝粉', '火锅']);
@@ -19,6 +20,7 @@ export default function Index(props: Props) {
   let [count, setCount] = useState(0);
   const [city, setCity] = useState<city>({});
   const [weather, setWeather] = useState<city>({});
+  const [foodMap, setFoodMap] = useState('');
   const RandomFood = async () => {
     if (!switchState) {
       message.error('还想自己选？你在想屁吃，自己把开关打开嗷!');
@@ -30,12 +32,16 @@ export default function Index(props: Props) {
     }
     // setFoodState(true);
     setButtonState(true);
+    let temFoodList: string[] = []
     const timer = setInterval(() => {
-      setFood(foodList[Math.floor(Math.random() * foodList.length)])
-    }, 100);
+      let food2 = foodList[Math.floor(Math.random() * foodList.length)];
+      setFood(food2)
+      temFoodList.push(food2)
+    }, 150);
     setTimeout(() => {
       setButtonState(false);
       clearInterval(timer);
+      setFoodMap(temFoodList[temFoodList.length - 1])
     }, 3000);
   }
   useEffect(() => {
@@ -55,54 +61,46 @@ export default function Index(props: Props) {
   }, [city, foodList]);
   useEffect(() => {
     getCity();
-    let cityTime = localStorage.getItem('cityTime')
+    // let cityTime = localStorage.getItem('cityTime')
     // console.log(cityTime);
-    let cityTime2 = moment().subtract(1, 'days').format('YYYY-MM-DD');
+    // let cityTime2 = moment().subtract(1, 'days').format('YYYY-MM-DD');
     // console.log(cityTime2);
-    if (cityTime === cityTime2) {
-      localStorage.removeItem('cityTime');
-      localStorage.removeItem('city');
-      localStorage.removeItem('weather');
-      localStorage.removeItem('weatherTime');
-      getCity();
-    }
-    // console.log(JSON.parse(localStorage.getItem('weather') as string));
+    // if (cityTime === cityTime2) {
+      // localStorage.removeItem('cityTime');
+      // localStorage.removeItem('city');
+      // localStorage.removeItem('weather');
+      // localStorage.removeItem('weatherTime');
+    //   getCity();
+    // }
   }, [])
   // 封装城市
   const getCity = async () => {
-    if (localStorage.getItem('city') === null) {
-      await $axios.get('https://restapi.amap.com/v3/ip', {
-        params: {
-          key: ''
-        }
-      }).then(res => {
+    // if (localStorage.getItem('city') === null) {
+      await getMap().then(res => {
         setCity(res.data)
         localStorage.setItem('city', JSON.stringify(res.data))
         localStorage.setItem('cityTime', moment().format('YYYY-MM-DD'))
         getWeather(res.data.adcode)
       })
-    } else {
-      setCity(JSON.parse(localStorage.getItem('city') as string))
-      getWeather(JSON.parse(localStorage.getItem('city') as string).adcode)
-    }
+    // } else {
+    //   setCity(JSON.parse(localStorage.getItem('city') as string))
+    //   getWeather(JSON.parse(localStorage.getItem('city') as string).adcode)
+    // }
   }
   // 封装天气请求
   const getWeather = async (cityCode: string) => {
-    if (localStorage.getItem('weather') === null) {
-      await $axios.get('https://restapi.amap.com/v3/weather/weatherInfo', {
-        params: {
-          key: '',
-          city: cityCode,
-          extensions: 'base'
-        }
+    // if (localStorage.getItem('weather') === null) {
+      await getMapWeather({
+        city: cityCode,
+        extensions: 'base'
       }).then(res => {
         setWeather(res.data.lives[0])
         localStorage.setItem('weather', JSON.stringify(res.data.lives[0]))
         localStorage.setItem('weatherTime', moment().format('YYYY-MM-DD'))
       })
-    } else {
-      setWeather(JSON.parse(localStorage.getItem('weather') as string))
-    }
+    // } else {
+    //   setWeather(JSON.parse(localStorage.getItem('weather') as string))
+    // }
   }
   // 选择开关
   const [switchState, setSwitchState] = useState(true);
@@ -110,6 +108,7 @@ export default function Index(props: Props) {
     setFood('开始选择食物吧!')
     setSwitchState(checked);
     setCount(0)
+    // setFoodMap('美食')
   }
   // 弹窗
   const [visible, setVisible] = useState(false);
@@ -136,9 +135,9 @@ export default function Index(props: Props) {
 
   return (
     <>
-      <div className="index">
+      <div className="FoodChiose">
         <img className='logo' src={require('../../static/image/logo.png')} alt="" />
-        <div className='select'>
+        <div className="time-address">
           <span className='time'>{date}</span>
           <div className="container">
             <span className='city'>{city.city}</span>
@@ -146,6 +145,8 @@ export default function Index(props: Props) {
               !weather ? '' : `${weather.weather} ${weather.temperature}°`
             }</span>
           </div>
+        </div>
+        <div className='select'>
           <div className='food'>{food}</div>
           <div className='select-children'>
             <Switch className='switch' checked={switchState}
@@ -195,6 +196,8 @@ export default function Index(props: Props) {
             }}
             value={text}></TextArea>
         </Modal>
+        <Map food={foodMap}
+          loading={buttonState} />
       </div>
     </>
   )

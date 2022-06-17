@@ -1,8 +1,7 @@
-.index {
+.FoodChiose {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   height: 100vh;
   background-color: #fff;
   user-select: none;
@@ -12,60 +11,65 @@
   overflow: hidden;
 }
 
-.index .logo {
-  width: 200px;
-  height: 40px;
-  position: absolute;
-  top: 10%;
-}
-
-.index .select {
+.FoodChiose .time-address {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  margin-top: 40px;
 }
 
-.index .select .time {
+.FoodChiose .time-address .time {
   font-size: 20px;
-  position: absolute;
-  top: calc(10% + 60px);
 }
 
-.index .select .container {
+.FoodChiose .time-address .container {
   font-size: 20px;
-  position: absolute;
-  top: calc(10% + 100px);
   width: 160px;
   display: flex;
   justify-content: space-between;
 }
 
-.index .select .food {
+.FoodChiose .logo {
+  margin-top: 40px;
+  width: 200px;
+  height: 40px;
+  top: 10%;
+}
+
+.FoodChiose .select {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.FoodChiose .select .food {
   font-size: 36px;
   color: #ff9733;
   margin-bottom: 20px;
   text-align: center;
 }
 
-.index .select .select-children .switch {
+.FoodChiose .select .select-children .switch {
   margin-right: 10px;
 }
 
-.index .select .option {
+.FoodChiose .select .option {
   margin-top: 20px;
 }
 
-.index .select .option button {
+.FoodChiose .select .option button {
   color: #1fd9f6;
   border: 1px solid #1fd9f6;
 }
 
-.index .select .option button:hover {
+.FoodChiose .select .option button:hover {
   background-color: #1fd9f6;
   color: #fff;
 }
 
-.index .select .option button:first-child {
+.FoodChiose .select .option button:first-child {
   margin-right: 20px;
 }
 
