@@ -2,6 +2,8 @@
   随机选择你输入的或者默认的食物，来搞定你的选择困难症
 
 ## 运行
+  因为目前添加了天气和地图，所以需要在高德开放平台申请key
+  然后在api文件夹map.ts文件内粘贴你的高德key即可使用
   使用yarn下载依赖，yarn start运行即可
 
 # Getting Started with Create React App
